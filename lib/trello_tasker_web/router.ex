@@ -17,7 +17,7 @@ defmodule TrelloTaskerWeb.Router do
   scope "/", TrelloTaskerWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", CardLive, :index
   end
 
   # Other scopes may use custom stacks.
