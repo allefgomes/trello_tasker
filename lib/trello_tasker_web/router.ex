@@ -43,6 +43,7 @@ defmodule TrelloTaskerWeb.Router do
       live_dashboard "/dashboard", metrics: TrelloTaskerWeb.Telemetry
     end
   end
+
   # coveralls-ignore-stop
 
   # Enables the Swoosh mailbox preview in development.
