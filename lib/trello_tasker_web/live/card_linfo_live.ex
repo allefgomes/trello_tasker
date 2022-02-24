@@ -2,8 +2,8 @@ defmodule TrelloTaskerWeb.CardInfoLive do
   use TrelloTaskerWeb, :live_view
 
   alias Phoenix.View
-  alias TrelloTaskerWeb.CardView
   alias TrelloTasker.Shared.Services.Trello
+  alias TrelloTaskerWeb.CardView
 
   @impl true
   def mount(params, _session, socket) do

@@ -4,8 +4,8 @@ defmodule TrelloTaskerWeb.CardLive do
   alias Phoenix.View
   alias TrelloTasker.Cards
   alias TrelloTasker.Cards.Card
-  alias TrelloTaskerWeb.CardView
   alias TrelloTasker.Shared.Services.Trello
+  alias TrelloTaskerWeb.CardView
 
   @impl true
   def mount(_params, _session, socket) do

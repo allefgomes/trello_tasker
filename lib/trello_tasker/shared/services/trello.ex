@@ -5,8 +5,9 @@ defmodule TrelloTasker.Shared.Services.Trello do
   plug Tesla.Middleware.Headers, [{"User-Agent", "request"}]
   plug Tesla.Middleware.JSON
 
-  @token Application.get_env(:trello_tasker, :trello)[:token]
-  @key Application.get_env(:trello_tasker, :trello)[:key]
+  # Necessário modificar para pegar apartir do Application.get_env(:trello_tasker, :trello)
+  @token System.get_env("TRELLO_TOKEN")
+  @key System.get_env("TRELLO_KEY")
 
   def get_card(card_id) do
     {:ok, response} =
