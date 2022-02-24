@@ -21,8 +21,6 @@ defmodule TrelloTaskerWeb.CardLive do
 
   @impl true
   def handle_event("create", %{"card" => card}, socket) do
-    # IO.inspect(params)
-
     changeset = %Ecto.Changeset{Card.changeset(%Card{}, card) | action: :insert}
 
     changeset.valid?
@@ -37,15 +35,11 @@ defmodule TrelloTaskerWeb.CardLive do
           {:error, msg} ->
             {:noreply, socket |> put_flash(:error, msg) |> push_redirect(to: "/")}
 
-          card_info ->
+          _card_info ->
             card
             |> Cards.create_card()
             |> response(socket)
-
-            {:noreply, card_info}
         end
-
-        {:noreply, socket}
     end
   end
 
