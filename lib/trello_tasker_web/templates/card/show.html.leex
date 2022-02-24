@@ -1,3 +1,16 @@
 <section class="card-info">
+  <h1><%= @card.name %></h1>
 
+  <ul class="list-group">
+    <%= for comment <- @comments do %>
+      <li class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <strong class="mb-1"><%= comment.username %></strong>
+          <small>3 days ago</small>
+        </div>
+
+        <p class="mb-1"><%= comment.content %></p>
+      </li>
+    <% end %>
+  </ul>
 </section>
