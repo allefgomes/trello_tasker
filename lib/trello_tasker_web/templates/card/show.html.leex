@@ -1,0 +1,48 @@
+<section class="card-info">
+
+
+  <header>
+    <h1><%= @card.name %></h1>
+    <%= if @card.image do %>
+      <div style="height: 400px; width: 100%; background: url(<%= @card.image %>); background-repeat: no-repeat; background-size: auto;   background-position: center;"></div>
+    <% end %>
+    <p class=""><%= @card.description %></p>
+
+    <ul>
+      <%= if @card.deliver_date do %>
+        <li>
+          <span>
+            <i class="fa fa-clock-o"></i>
+            <%= @card.deliver_date %>
+          </span>
+        </li>
+      <% end %>
+
+      <li>
+        <span>
+          <i class="fa fa-check-circle-o"></i>
+          <%= @card.completed && "Feito" || "Em andamento" %>
+        </span>
+      </li>
+    </ul>
+  </header>
+
+  <ul class="list-group">
+    <%= for comment <- @comments do %>
+      <li class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <strong class="mb-1"><%= comment.username %></strong>
+          <small>3 days ago</small>
+        </div>
+
+        <p class="mb-1"><%= comment.content %></p>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= if Enum.count(@comments) == 0 do %>
+    <p>Sem comentários...</p>
+  <% end %>
+</section>
+
+<br/>
