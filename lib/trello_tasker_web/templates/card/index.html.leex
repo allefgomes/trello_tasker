@@ -1,26 +1,28 @@
 <section class="container">
   <h1>Monitore seus Cards do Tello</h1>
 
-  <form action="" class="row g-3" id="create-card">
-    <div class="col-auto">
-      <input class="form-control" type="text" name="number" id="card-number" placeholder="Informe o número do Card">
-    </div>
-    <div class="col-auto">
-      <button class="mb-3 btn btn-primary mb-3" type="submit">Pesquisar</button>
-    </div>
-  </form>
+  <%= f = form_for @changeset, "#", class: "row g-3", id: "create-card", phx_submit: "create" %>
+  <div class="col-auto">
+    <%= text_input f, :path, class: "form-control #{f.errors && f.errors[:path] && "is-invalid"}", placeholder: "Informe o número do Card" %>
+    <%= error_tag f, :path %>
+  </div>
+  <div class="col-auto">
+    <%= submit "Pesquisar", phx_disable_with: "Pesquisando...", class: "mb-3 btn btn-primary mb-3" %>
+  </div>
 
   <div class="container">
     <div class="row">
       <%= for card <- @cards do %>
-        <div class="card col-3" style="padding: 5px; margin: 5px;">
-          <img src="<%= card.image %>" class="card-img-top" style="padding: 10px;" alt="<%= card.name %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= card.name %></h5>
-            <p class="card-text"><%= card.description %></p>
-            <a href="#" class="btn btn-primary">Saiba Mais</a>
+          <div class="card col-3" style="padding: 5px; margin: 5px;">
+            <img src="<%= card.image %>" class="card-img-top" style="padding: 10px;" alt="<%= card.name %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= card.name %></h5>
+              <p class="card-text"><%= card.description %></p>
+              <%= live_redirect to: Routes.card_info_path(@socket, :show, card.card_id), class: "btn btn-primary" do %>
+                Saiba Mais
+              <% end %>
+            </div>
           </div>
-        </div>
       <% end %>
     </div>
   </div>

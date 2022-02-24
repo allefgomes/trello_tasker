@@ -39,7 +39,7 @@ defmodule TrelloTasker.Shared.Services.Trello do
   end
 
   defp handle_response(response) when response.status != 200 do
-    %{error: "Erro ao buscar card"}
+    {:error, "Erro ao buscar card"}
   end
 
   defp handle_delivery_date(nil), do: nil
