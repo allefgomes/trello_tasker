@@ -3,10 +3,15 @@ defmodule TrelloTaskerWeb.CardInfoLive do
 
   alias Phoenix.View
   alias TrelloTaskerWeb.CardView
+  alias TrelloTasker.Shared.Services.Trello
 
   @impl true
-  def mount(_params, _session, socket) do
-    { :ok, socket }
+  def mount(params, _session, socket) do
+    card = Trello.get_card(params["id"])
+    comments = Trello.get_comments(params["id"])
+
+    socket = socket |> assign(card: card, comments: comments)
+    {:ok, socket}
   end
 
   @impl true
