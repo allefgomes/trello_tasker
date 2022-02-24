@@ -11,8 +11,9 @@ defmodule TrelloTaskerWeb.CardLive do
   def mount(_params, _session, socket) do
     changeset = Card.changeset(%Card{}, %{})
     # card = Trello.get_card("7ffdJ8bz")
-    cards = Cards.list_cards()
-    |> Enum.map(&Trello.get_card(&1.path))
+    cards =
+      Cards.list_cards()
+      |> Enum.map(&Trello.get_card(&1.path))
 
     socket = socket |> assign(cards: cards, changeset: changeset)
     {:ok, socket}
@@ -40,6 +41,7 @@ defmodule TrelloTaskerWeb.CardLive do
             card
             |> Cards.create_card()
             |> response(socket)
+
             {:noreply, card_info}
         end
 
@@ -51,7 +53,8 @@ defmodule TrelloTaskerWeb.CardLive do
     do:
       {:noreply, socket |> put_flash(:info, "Card criado com sucesso!") |> push_redirect(to: "/")}
 
-  defp response({:error, changeset}, socket), do: {:noreply, assign(socket, :changeset, changeset)}
+  defp response({:error, changeset}, socket),
+    do: {:noreply, assign(socket, :changeset, changeset)}
 
   @impl true
   def render(assings) do
