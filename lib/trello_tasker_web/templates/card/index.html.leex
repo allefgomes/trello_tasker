@@ -10,14 +10,18 @@
     </div>
   </form>
 
-  <div class="cards">
-    <a href="">
-      <img src="" alt="">
-      <div>
-        <strong>Terminar aula</strong>
-      </div>
-
-      <i class="fa fa-check-circle-o"></i>
-    </a>
+  <div class="container">
+    <div class="row">
+      <%= for card <- @cards do %>
+        <div class="card col-3" style="padding: 5px; margin: 5px;">
+          <img src="<%= card.image %>" class="card-img-top" style="padding: 10px;" alt="<%= card.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= card.name %></h5>
+            <p class="card-text"><%= card.description %></p>
+            <a href="#" class="btn btn-primary">Saiba Mais</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </section>
