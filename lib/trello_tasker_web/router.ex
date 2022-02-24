@@ -10,9 +10,9 @@ defmodule TrelloTaskerWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
   scope "/", TrelloTaskerWeb do
     pipe_through :browser
@@ -20,6 +20,8 @@ defmodule TrelloTaskerWeb.Router do
     live "/card/:id", CardInfoLive, :show
     live "/", CardLive, :index
   end
+
+  # coveralls-ignore-start
 
   # Other scopes may use custom stacks.
   # scope "/api", TrelloTaskerWeb do
@@ -42,6 +44,8 @@ defmodule TrelloTaskerWeb.Router do
       live_dashboard "/dashboard", metrics: TrelloTaskerWeb.Telemetry
     end
   end
+
+  # coveralls-ignore-stop
 
   # Enables the Swoosh mailbox preview in development.
   #
