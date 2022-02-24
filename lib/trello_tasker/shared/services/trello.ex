@@ -10,9 +10,7 @@ defmodule TrelloTasker.Shared.Services.Trello do
   @key System.get_env("TRELLO_KEY")
 
   def get_card(card_id) do
-    {:ok, response} =
-      "#{card_id}?list=true&key=#{@key}&token=#{@token}"
-      |> get()
+    {:ok, response} = get("#{card_id}?list=true&key=#{@key}&token=#{@token}")
 
     handle_response(response)
   end

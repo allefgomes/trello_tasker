@@ -3,7 +3,7 @@
 
   <%= f = form_for @changeset, "#", class: "row g-3", id: "create-card", phx_submit: "create" %>
   <div class="col-auto">
-    <%= text_input f, :path, class: "form-control #{f.errors && f.errors[:path] && "is-invalid"}", placeholder: "Informe o número do Card" %>
+    <%= text_input f, :path, id: "card-id", class: "form-control #{f.errors && f.errors[:path] && "is-invalid"}", placeholder: "Informe o número do Card" %>
     <%= error_tag f, :path %>
   </div>
   <div class="col-auto">
