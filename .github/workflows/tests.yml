@@ -9,6 +9,9 @@ jobs:
       matrix:
         elixir: [1.13]
         otp: [24]
+    env:
+      TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
+      TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
     steps:
       - uses: actions/checkout@v2
       - uses: erlef/setup-elixir@v1
