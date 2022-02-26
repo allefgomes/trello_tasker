@@ -2,21 +2,16 @@ defmodule TrelloTaskerWeb.CardLive do
   use TrelloTaskerWeb, :live_view
 
   alias Phoenix.View
-  alias TrelloTasker.Cards
   alias TrelloTasker.Cards.Card
-  alias TrelloTasker.Shared.Services.Trello
+  alias TrelloTasker.Shared.Services.{CreateCard, GetAllCards}
   alias TrelloTaskerWeb.CardView
 
   @impl true
   def mount(_params, _session, socket) do
     changeset = Card.changeset(%Card{}, %{})
-    # card = Trello.get_card("7ffdJ8bz")
-    cards =
-      Cards.list_cards()
-      |> Enum.map(&Trello.get_card(&1.path))
+    cards = GetAllCards.execute()
 
-    socket = socket |> assign(cards: cards, changeset: changeset)
-    {:ok, socket}
+    {:ok, socket |> assign(cards: cards, changeset: changeset)}
   end
 
   @impl true
@@ -29,17 +24,9 @@ defmodule TrelloTaskerWeb.CardLive do
         response({:error, changeset}, socket)
 
       true ->
-        card["path"]
-        |> Trello.get_card()
-        |> case do
-          {:error, msg} ->
-            {:noreply, socket |> put_flash(:error, msg) |> push_redirect(to: "/")}
-
-          _card_info ->
-            card
-            |> Cards.create_card()
-            |> response(socket)
-        end
+        card
+        |> CreateCard.execute()
+        |> response(socket)
     end
   end
 
