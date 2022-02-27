@@ -8,7 +8,7 @@ defmodule TrelloTasker.Shared.Services.GetCardInfo do
   def execute(id) do
     CardCacheClient.recovery(id)
     |> case do
-      {:ok, {comments, card}} ->
+      {:ok, {card, comments}} ->
         {:ok, card, comments}
 
       {:not_found, []} ->
@@ -16,9 +16,9 @@ defmodule TrelloTasker.Shared.Services.GetCardInfo do
         card_info = cards |> Enum.find(&(&1.card_id == id))
 
         card_comments = Trello.get_comments(id)
-        CardCacheClient.save(id, {card_comments, card_info})
+        CardCacheClient.save(id, {card_info, card_comments})
 
-        {:ok, card_comments, card_info}
+        {:ok, card_info, card_comments}
     end
   end
 end
