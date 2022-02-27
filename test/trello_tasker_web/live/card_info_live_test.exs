@@ -4,7 +4,7 @@ defmodule TrelloTaskerWeb.CardInfoLiveTest do
 
   alias TrelloTasker.Shared.Services.Trello
 
-  @card_id "7ffdJ8bz"
+  @card_id "stvxJXK3"
 
   test "load page", %{conn: conn} do
     card = Trello.get_card(@card_id)

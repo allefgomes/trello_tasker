@@ -7,19 +7,22 @@
     <%= error_tag f, :path %>
   </div>
   <div class="col-auto">
-    <%= submit "Pesquisar", phx_disable_with: "Pesquisando...", class: "mb-3 btn btn-primary mb-3" %>
+    <%= submit "Cadastrar", phx_disable_with: "Cadastrando...", class: "mb-3 btn btn-primary mb-3" %>
   </div>
 
   <div class="container">
     <div class="row">
       <%= for card <- @cards do %>
           <div class="card col-3" style="padding: 5px; margin: 5px;">
-            <img src="<%= card.image %>" class="card-img-top" style="padding: 10px;" alt="<%= card.name %>">
+            <%= if card.image do %>
+              <img src="<%= card.image %>" class="card-img-top" style="padding: 10px;" alt="<%= card.name %>">
+            <% end %>
             <div class="card-body">
               <h5 class="card-title"><%= card.name %></h5>
               <p class="card-text"><%= card.description %></p>
+
               <%= live_redirect to: Routes.card_info_path(@socket, :show, card.card_id), class: "btn btn-primary" do %>
-                Saiba Mais
+                <b>Saiba Mais</b> #<%= card.card_id %>
               <% end %>
             </div>
           </div>

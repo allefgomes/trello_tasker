@@ -15,9 +15,10 @@ defmodule TrelloTasker.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: TrelloTasker.PubSub},
       # Start the Endpoint (http/https)
-      TrelloTaskerWeb.Endpoint
+      TrelloTaskerWeb.Endpoint,
       # Start a worker by calling: TrelloTasker.Worker.start_link(arg)
       # {TrelloTasker.Worker, arg}
+      TrelloTasker.Shared.Providers.CacheProvider.CardCache
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
